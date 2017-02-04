@@ -1,5 +1,6 @@
 body {
     color: #555;
+    background-color: #ffffff;
 }
 a {
     text-decoration: none;
@@ -153,14 +154,19 @@ a.button:hover {
     height: 50px;
 }
 
+.heading{
+    font-weight: 600;
+}
+
 .header {
     font-family: "Roboto Slab";
     font-size: 20px;
     line-height: 50px;
-    color: #999;
+    color: #222222;
     padding: 0px 10px;
     height: 50px;
-    background: #333;
+    background: #ffffff;
+    border-bottom: solid #747474;
 }
 .header-content {
     width: 100%;
@@ -170,7 +176,7 @@ a.button:hover {
 }
 .header-content .logo {
     vertical-align: middle;
-    height: 20px;
+    height: 44px;
 }
 .header-content a {
     color: #999;
