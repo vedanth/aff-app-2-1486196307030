@@ -154,8 +154,8 @@ $(function() {
 
     $.ajax({
         type: 'GET',
-//        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix:446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952@bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-01-31/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=1&descending=true',
-        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-01-31/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=1&descending=true',
+        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix:446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952@bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-01-31/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=1&descending=true',
+//        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-01-31/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=1&descending=true',
         success: function(data) {
             console.log(data.rows[0].value.data.d.memory);
 //            alert('success');
