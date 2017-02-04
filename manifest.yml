@@ -1,0 +1,11 @@
+applications:
+- path: .
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  name: aff-app-2
+  host: aff-app-2
+  disk_quota: 1024M
+  services:
+  - aff-app-2-cloudantNoSQLDB
+  - aff-app-2-iotf-service
