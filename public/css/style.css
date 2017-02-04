@@ -158,6 +158,9 @@ a.button:hover {
     font-weight: 600;
 }
 
+td{
+    text-align: center
+}
 .header {
     font-family: "Roboto Slab";
     font-size: 20px;
