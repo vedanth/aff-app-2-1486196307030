@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Device Dashboard </title>
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+    <!--<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">-->
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+	<link href="css/simplegrid.css" rel="stylesheet" media="screen">
+	<link href="css/style.css" rel="stylesheet" media="screen">
+
+	
+</head>
+<body>
+
+<div class="header">
+    <div class="header-content">
+        <a href="/"><img class="logo" src="images/tekaffore_medium_blue.png" /> Device Dashboard and Visualization</a>
+    </div>
+</div>
+
+<!-- Grid 1/2 -->
+<div class="row">
+    <div class="grid">
+        <div class="col-1-1">
+            <div class="content blurb">
+
+                <table >
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>DG 1 - SGP 1094</th>
+                        <th>DG 2 - 1159</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Project - Nural Island <br>Client: Zira <br> Capacity: 100Kva </td>
+                        <td>
+                            <img src="images/Diesel-Generator.jpg" height="120px" border="1">
+                        </td>
+                        <td>
+                            <img src="images/generator-set-250x250.jpg" height="120px" border="1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="heading">
+                            Nominal Power:
+                        </td>
+                        <td class="iot-value">
+                            Loading ...
+                        </td>
+                        <td class="iot-value">
+                            Loading ...
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="heading">
+                            Active Power:
+                        </td>
+                        <td>
+                            340 kVA
+                        </td>
+                        <td>
+                            500 kVA
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="heading">
+                            Apparent Power:
+                        </td>
+                        <td>
+                            410 kVA
+                        </td>
+                     <td>
+                            680 kVA
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="heading">
+                            Line Voltage:
+                        </td>
+                        <td>
+                            414 kVA
+                        </td>
+                        <td>
+                            889 kVA
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="heading">
+                            Power Factor:
+                        </td>
+                        <td>
+                            130 HP
+                        </td>
+                        <td>
+                            0 HP
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td  class="heading">
+                            Energy:
+                        </td>
+                        <td>
+                            620 A
+                        </td>
+                        <td>
+                            0 A
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td class="heading">
+                            Mode:
+                        </td>
+                        <td>
+                            AUT
+                        </td>
+                        <td>
+                            AUT
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="heading">
+                            Coolant:
+                        </td>
+                        <td>
+                            -32768 degrees
+                        </td>
+                        <td>
+                            -32768 degrees
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="heading">
+                            Battery:
+                        </td>
+                        <td>
+                            25.3 V
+                        </td>
+                        <td>
+                            25.3 V
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="heading">
+                            Tank Capacity:
+                        </td>
+                        <td>
+                            1.5 Liters
+                        </td>
+                        <td>
+                            2.5 Liters
+                        </td>
+                    </tr>
+
+                    </tbody>
+
+
+                </table>
+
+			</div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+$(function() {
+
+    $.ajax({
+        type: 'GET',
+        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix:446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952@bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-01-31/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=1&descending=true',
+//        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-01-31/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=1&descending=true',
+        success: function(data) {
+            console.log(data.rows[0].value.data.d.memory);
+//            alert('success');
+            $('.iot-value').text(data.rows[0].value.data.d.memory + ' kVA');
+        },
+        dataType: 'jsonp',
+        error: function(jqXHR,textStatus,errorThrown) {
+            console.log(errorThrown);
+            console.log(textStatus);
+            console.log(jqXHR)
+            alert('error');
+        }
+    });
+
+});
+</script>
+</body>
+</html>
