@@ -242,7 +242,7 @@ var ChartsFlotcharts = function() {
                     yaxis: {
                         ticks: 11,
                         tickDecimals: 0,
-                        tickColor: "#eee",
+                        tickColor: "#eee"
                     }
                 });
 
@@ -420,7 +420,7 @@ var ChartsFlotcharts = function() {
                 };
 
 
-                var updateInterval = 2000;
+                var updateInterval = 10000;
                 var plot = $.plot($("#chart_4"), [getRandomData()], options);
 
                 function getDataFromBluemix(){
@@ -441,6 +441,7 @@ var ChartsFlotcharts = function() {
 //                            console.log(res);
                             plot.setData([res]);
                             plot.draw();
+                            $('#last_updated').text(new Date());
 //                        $('.iot-value').text(data.rows[0].value.data.d.memory + ' kVA');
                         },
                         dataType: 'jsonp',

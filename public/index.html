@@ -20,7 +20,8 @@
 <link href="plugins/css/components-md.css" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="plugins/layout/css/layout.css" rel="stylesheet" type="text/css"/>
 <link href="plugins/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css" id="style_color"/>
-<!-- END THEME STYLES -->
+
+    <!-- END THEME STYLES -->
 
 </head>
 <body class="page-md page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo ">
@@ -50,7 +51,7 @@
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 					<i class="icon-bell"></i>
 					<span class="badge badge-default">
-					7 </span>
+					</span>
 					</a>
 					<ul class="dropdown-menu">
 						<li class="external">
@@ -155,40 +156,223 @@
 			<!-- END PAGE HEADER-->
 			<div class="clearfix">
 			</div>
-			<div class="row">
+
+            <div class="row">
+
+            <div class="col-md-6">
+                <!-- BEGIN PORTLET-->
+                <div class="portlet box blue">
+
+
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-gift"></i>Nominal Power - Trending Chart
+
+                        </div>
+                        <div class="caption">
+                            <i> &nbsp; &nbsp; &nbsp;  &nbsp;  Last Updated : <span id="last_updated"></span> </i>
+
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="chart_4" class="chart">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                    <!-- BEGIN INLINE NOTIFICATIONS PORTLET-->
+                    <div class="portlet">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-cogs"></i>Site 1 Devices
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse">
+                                </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config">
+                                </a>
+                                <a href="javascript:;" class="reload">
+                                </a>
+                                <a href="javascript:;" class="remove">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+
+                            <div class="table-scrollable">
+                                <table class="table table-hover cell-border dataTable">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>DG 1 - SGP 1094</th>
+                                        <th>DG 2 - 1159</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td align="center">
+                                            Project - Nural Island <br>Client: Zira <br> Capacity: 100Kva
+                                        </td>
+                                        <td>
+                                            <img src="images/Diesel-Generator.jpg" class="img-circle" alt="Cinque Terre" height="100px" width="100px" border="1">
+                                        </td>
+                                        <td>
+                                            <img src="images/generator-set-250x250.jpg" height="100px" width="100px" class="img-circle" alt="Cinque Terre" border="1">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="heading">
+                                            Nominal Power:
+                                        </td>
+                                        <td class="nominal_power">
+                                            Loading ...
+                                        </td>
+                                        <td class="iot-value">
+                                            560 kVA
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="heading">
+                                            Active Power:
+                                        </td>
+                                        <td class="active_power">
+                                            Loading ...
+                                        </td>
+                                        <td>
+                                            500 kVA
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="heading">
+                                            Apparent Power:
+                                        </td>
+                                        <td class="apprent_power">
+                                            loading ...
+                                        </td>
+                                        <td>
+                                            680 kVA
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="heading">
+                                            Line Voltage:
+                                        </td>
+                                        <td class="line_voltage">
+                                            Loading ...
+                                        </td>
+                                        <td>
+                                            889 kVA
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="heading">
+                                            Power Factor:
+                                        </td>
+                                        <td class="power_factor">
+                                            Loading ...
+                                        </td>
+                                        <td>
+                                            0 HP
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td  class="heading">
+                                            Energy:
+                                        </td>
+                                        <td class="energy">
+                                            Loading ...
+                                        </td>
+                                        <td>
+                                            0 A
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="heading">
+                                            Mode:
+                                        </td>
+                                        <td>
+                                            AUT
+                                        </td>
+                                        <td>
+                                            AUT
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="heading">
+                                            Coolant:
+                                        </td>
+                                        <td class="coolant">
+                                            Loading
+                                        </td>
+                                        <td>
+                                            -32768 degrees
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="heading">
+                                            Battery:
+                                        </td>
+                                        <td class="battery">
+                                            Loading ...
+                                        </td>
+                                        <td>
+                                            25.3 V
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="heading">
+                                            Tank Capacity:
+                                        </td>
+                                        <td class="tank_cap">
+                                            Loading ...
+                                        </td>
+                                        <td>
+                                            2.5 Liters
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- END INLINE NOTIFICATIONS PORTLET-->
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
 				
-				<div class="col-md-12">
-					<!-- BEGIN PORTLET-->
-				<div class="portlet box blue">
-				
-				
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-gift"></i>Dynamic Chart
-							</div>
-							<div class="tools">
-								<a href="javascript:;" class="collapse">
-								</a>
-								<a href="#portlet-config" data-toggle="modal" class="config">
-								</a>
-								<a href="javascript:;" class="reload">
-								</a>
-								<a href="javascript:;" class="remove">
-								</a>
-							</div>
-						</div>
-						<div class="portlet-body">
-							<div id="chart_4" class="chart">
-							</div>
-						</div>
-					
-					
-					</div>
-					</div>
 					<!-- END PORTLET-->
 				</div>
-			</div>
-			<div class="clearfix">
+
+        </div>
+
+    </div>
+
+    <div class="clearfix">
 			</div>
 
 		</div>
@@ -225,6 +409,37 @@
 <script>
 jQuery(document).ready(function() {    
    ChartsFlotcharts.initCharts();
+
+
+    $.ajax({
+        type: 'GET',
+        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix:446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952@bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-02-11/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=1&descending=true',
+//        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-01-31/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=1&descending=true',
+        success: function(data) {
+
+            console.log(data.rows[0].value.data);
+            console.log( '@@@ '+ data.rows[0].value.data.d.nominal_power);
+            $('.nominal_power').text(data.rows[0].value.data.d.nominal_power+ ' kVA');
+            $('.active_power').text(data.rows[0].value.data.d.active_power+ ' kVA');
+            $('.apprent_power').text(data.rows[0].value.data.d.apprent_power+ ' kVA');
+            $('.battery').text(data.rows[0].value.data.d.battery+ ' V');
+            $('.coolant').text(data.rows[0].value.data.d.coolant+ ' degrees');
+            $('.power').text(data.rows[0].value.data.d.power);                !
+            $('.power_factor').text(data.rows[0].value.data.d.power_factor+ ' HP');
+            $('.energy').text(data.rows[0].value.data.d.energy+ ' A');
+            $('.line_voltage').text(data.rows[0].value.data.d.line_voltage + ' kVA');
+            $('.tank_cap').text(data.rows[0].value.data.d.tank_capacity + ' Liters');
+
+//                        $('.iot-value').text(data.rows[0].value.data.d.memory + ' kVA');
+        },
+        dataType: 'jsonp',
+        error: function(jqXHR,textStatus,errorThrown) {
+            console.log(errorThrown);
+            console.log(textStatus);
+            console.log(jqXHR)
+
+        }
+    });
   
 });
 </script>
