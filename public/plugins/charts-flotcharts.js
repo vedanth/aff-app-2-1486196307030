@@ -402,30 +402,66 @@ var ChartsFlotcharts = function() {
                         }
                     },
                     yaxis: {
-                        min: 0,
-                        max: 100,
+                        min: 300,
+                        max: 1200,
                         tickColor: "#eee",
                         tickFormatter: function(v) {
-                            return v + "%";
+                            return v + " kVA";
                         }
                     },
                     xaxis: {
-                        show: false,
+                        show: false
                     },
                     colors: ["#6ef146"],
                     grid: {
                         tickColor: "#eee",
-                        borderWidth: 0,
+                        borderWidth: 0
                     }
                 };
 
-                var updateInterval = 30;
+
+                var updateInterval = 2000;
                 var plot = $.plot($("#chart_4"), [getRandomData()], options);
 
+                function getDataFromBluemix(){
+                    $.ajax({
+                        type: 'GET',
+                        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix:446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952@bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-02-11/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=250&descending=true',
+//        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-01-31/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=1&descending=true',
+                        success: function(data) {
+//                        console.log(data.rows[0].value);
+//            alert('success');
+
+                            var res = [];
+                            for(var i = 0; i < data.rows.length; i++)
+                            {
+                                res.push([i, data.rows[i].value.data.d.nominal_power]);
+//                                console.log( '@@@ '+ data.rows[i].value.data.d.nominal_power);
+                            }
+//                            console.log(res);
+                            plot.setData([res]);
+                            plot.draw();
+//                        $('.iot-value').text(data.rows[0].value.data.d.memory + ' kVA');
+                        },
+                        dataType: 'jsonp',
+                        error: function(jqXHR,textStatus,errorThrown) {
+                            console.log(errorThrown);
+                            console.log(textStatus);
+                            console.log(jqXHR)
+
+                        }
+                    });
+                }
+
+
+
                 function update() {
-                    plot.setData([getRandomData()]);
-                    plot.draw();
-                    setTimeout(update, updateInterval);
+//                    console.log(getRandomData());
+                    getDataFromBluemix();
+//                    console.log(getDataFromBluemix());
+//                    plot.setData([getRandomData()]);
+//                    plot.draw();
+                    setInterval(getDataFromBluemix, updateInterval);
                 }
                 update();
             }
