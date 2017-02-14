@@ -166,21 +166,97 @@
 
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-gift"></i>Nominal Power - Trending Chart
+                            <i class="fa fa-gift"></i>Trending Chart
 
                         </div>
-                        <div class="caption">
-                            <i> &nbsp; &nbsp; &nbsp;  &nbsp;  Last Updated : <span id="last_updated"></span> </i>
+                        <div class="actions">
+                            <div class="btn-group">
+                                <a href="" class="btn grey-salsa btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    Refresh Interval<span class="fa fa-angle-down">
+									</span>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="javascript:;" key="1" onclick="setDatasetTime(this);">
+                                            1 min
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" key="15" onclick="setDatasetTime(this);">
+                                            15 min
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" key="30" onclick="setDatasetTime(this);">
+                                            30 min
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" key="45" onclick="setDatasetTime(this);">
+                                            45 min
+                                        </a>
+                                    </li>
 
-                        </div>
-                        <div class="tools">
-                            <a href="javascript:;" class="collapse">
-                            </a>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <a href="" class="btn grey-salsa btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    Criteria<span class="fa fa-angle-down">
+									</span>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="javascript:;" key="nominal_power" onclick="setDatasetKey(this);">
+                                            Nominal Power
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" key="active_power" onclick="setDatasetKey(this);">
+                                            Active Power
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" key="apprent_power" onclick="setDatasetKey(this);">
+                                            Apprent_power
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" key="line_voltage" onclick="setDatasetKey(this);">
+                                            Line Voltage
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" key="power_factor" onclick="setDatasetKey(this);">
+                                            Power Factor
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" key="current" onclick="setDatasetKey(this);">
+                                            Current
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" key="energy" onclick="setDatasetKey(this);">
+                                            Energy
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" key="coolant" onclick="setDatasetKey(this);">
+                                            Coolant
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" key="battery" onclick="setDatasetKey(this);">
+                                            Battery
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div id="chart_4" class="chart">
-                        </div>
+
+                        <canvas id="myChart" width="400" height="400"></canvas>
                     </div>
 
 
@@ -395,20 +471,38 @@
 <script src="plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script src="plugins/metronic.js" type="text/javascript"></script>
+<script src="plugins/chartjs/chart.bundle.min.js" type="text/javascript"></script>
 
-<script src="plugins/flot/jquery.flot.min.js"></script>
-<script src="plugins/flot/jquery.flot.resize.min.js"></script>
-<script src="plugins/flot/jquery.flot.stack.min.js"></script>
+<!--<script src="plugins/flot/jquery.flot.min.js"></script>-->
+<!--<script src="plugins/flot/jquery.flot.resize.min.js"></script>-->
+<!--<script src="plugins/flot/jquery.flot.stack.min.js"></script>-->
 
-<script src="plugins/charts-flotcharts.js"></script>
+<!--<script src="plugins/charts-flotcharts.js"></script>-->
 
 
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-jQuery(document).ready(function() {    
-   ChartsFlotcharts.initCharts();
+
+    var datasetKey = 'active_power';
+    var datasetTime = 1;
+
+    function setDatasetKey(evt){
+
+        datasetKey = $(evt).attr('key');
+        populateData(datasetKey);
+    }
+
+    function setDatasetTime(evt){
+
+        datasetTime = $(evt).attr('key');
+
+    }
+
+jQuery(document).ready(function() {
+//   ChartsFlotcharts.initCharts();
+
 
 
     $.ajax({
@@ -440,8 +534,90 @@ jQuery(document).ready(function() {
 
         }
     });
-  
+
+    function update() {
+//                    console.log(getRandomData());
+//        populateData(datasetKey);
+//                    console.log(getDataFromBluemix());
+//                    plot.setData([getRandomData()]);
+//                    plot.draw();
+        setInterval(populateData(datasetKey), datasetTime*60*1000);
+//        setInterval(populateData, 5000);
+    }
+    update();
+
 });
+
+
+   function populateData(){
+               console.log('###');
+       $.ajax({
+           type: 'GET',
+           url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix:446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952@bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-02-11/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=20&descending=true',
+           success: function(data) {
+               var res = [];
+               var points = [];
+               for(var i = 0; i < data.rows.length; i++)
+               {
+                   var date1 = data.rows[i].value.timestamp;
+                   var date =date1.split('T');
+
+                   res.push(date[1].split('.')[0]);
+                   points.push(eval('data.rows[i].value.data.d.'+datasetKey));
+
+               }
+               var data = {
+                   labels: res,
+                   datasets: [
+                       {
+                           label: datasetKey,
+                           fill: true,
+                           lineTension: 0.1,
+                           backgroundColor: "#fbc5c5",
+                           borderColor: "#fbc5c5",
+//                borderCapStyle: 'butt',
+                           borderDash: [],
+                           borderDashOffset: 0.0,
+                           borderJoinStyle: 'miter',
+                           pointBorderColor: "#f89f9f",
+                           pointBackgroundColor: "#f89f9f",
+                           pointBorderWidth: 1,
+                           pointHoverRadius: 5,
+                           pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                           pointHoverBorderColor: "rgba(220,220,220,1)",
+                           pointHoverBorderWidth: 1,
+                           pointRadius: 3,
+                           pointHitRadius: 1,
+                           data: points,
+                           spanGaps: false
+                       }
+                   ]
+               };
+
+
+               var ctx = $("#myChart");
+               var myLineChart = new Chart(ctx, {
+                   type: 'line',
+                   data: data
+               });
+
+             /*  plot.setData([res]);
+               plot.draw();
+               $('#last_updated').text(new Date());*/
+           },
+           dataType: 'jsonp',
+           error: function(jqXHR,textStatus,errorThrown) {
+               console.log(errorThrown);
+               console.log(textStatus);
+               console.log(jqXHR)
+
+           }
+       });
+   }
+
+
+
+
 </script>
 <!-- END JAVASCRIPTS -->
 </body>
