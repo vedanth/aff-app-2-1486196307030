@@ -504,29 +504,28 @@ jQuery(document).ready(function() {
 //   ChartsFlotcharts.initCharts();
 
 
-
     $.ajax({
-        type: 'GET',
-        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix:446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952@bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-02-11/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=1&descending=true',
-//        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-01-31/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=1&descending=true',
-        success: function(data) {
-
-            console.log(data.rows[0].value.data);
-            console.log( '@@@ '+ data.rows[0].value.data.d.nominal_power);
-            $('.nominal_power').text(data.rows[0].value.data.d.nominal_power+ ' kVA');
-            $('.active_power').text(data.rows[0].value.data.d.active_power+ ' kVA');
-            $('.apprent_power').text(data.rows[0].value.data.d.apprent_power+ ' kVA');
-            $('.battery').text(data.rows[0].value.data.d.battery+ ' V');
-            $('.coolant').text(data.rows[0].value.data.d.coolant+ ' degrees');
-            $('.power').text(data.rows[0].value.data.d.power);                !
-            $('.power_factor').text(data.rows[0].value.data.d.power_factor+ ' HP');
-            $('.energy').text(data.rows[0].value.data.d.energy+ ' A');
-            $('.line_voltage').text(data.rows[0].value.data.d.line_voltage + ' kVA');
-            $('.tank_cap').text(data.rows[0].value.data.d.tank_capacity + ' Liters');
-
-//                        $('.iot-value').text(data.rows[0].value.data.d.memory + ' kVA');
+        type: 'post',
+        contentType: 'application/json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Basic " + btoa('bba026be-4c3d-4270-b651-26df5dc07671-bluemix' + ":" + '446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952'));
         },
-        dataType: 'jsonp',
+        data: '{ "selector": { "device_type": "Generator" }, "fields": ["_id","_rev","device_type","device_id","data_timestamp","d.energy","d.nominal_power","d.line_voltage","d.coolant","d.mode","d.battery","d.tank_capacity","d.current", "d.apprent_power","d.active_power", "d.power_factor"], "sort": [{"device_type": "desc"},{"device_id": "desc"},{"data_timestamp": "desc"}], "limit": 1, "skip": 0, "use_index":["_design/f7ed82b6c849da29fa8de968269701220661a4b5"] }',
+        url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix:446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952@bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/db_device_data_1_16_02/_find',
+        success: function(data) {
+            console.log(data);
+            $('.nominal_power').text(data.docs[0].d.nominal_power+ ' kVA');
+            $('.active_power').text(data.docs[0].d.active_power+ ' kVA');
+            $('.apprent_power').text(data.docs[0].d.apprent_power+ ' kVA');
+            $('.battery').text(data.docs[0].d.battery+ ' V');
+            $('.coolant').text(data.docs[0].d.coolant+ ' degrees');
+            $('.power').text(data.docs[0].d.power);
+            $('.power_factor').text(data.docs[0].d.power_factor+ ' HP');
+            $('.energy').text(data.docs[0].d.energy+ ' A');
+            $('.line_voltage').text(data.docs[0].d.line_voltage + ' kVA');
+            $('.tank_cap').text(data.docs[0].d.tank_capacity + ' Liters');
+        },
+//           dataType: 'jsonp',
         error: function(jqXHR,textStatus,errorThrown) {
             console.log(errorThrown);
             console.log(textStatus);
@@ -534,6 +533,7 @@ jQuery(document).ready(function() {
 
         }
     });
+
 
     function update() {
 //                    console.log(getRandomData());
@@ -550,20 +550,28 @@ jQuery(document).ready(function() {
 
 
    function populateData(){
-               console.log('###');
+
        $.ajax({
-           type: 'GET',
-           url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix:446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952@bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/iotp_q5yli1_default_2017-02-11/_design/iotp/_view/by-deviceId?key="aff-app-2-device"&limit=20&descending=true',
+           type: 'post',
+           contentType: 'application/json',
+           beforeSend: function (xhr) {
+               xhr.setRequestHeader ("Authorization", "Basic " + btoa('bba026be-4c3d-4270-b651-26df5dc07671-bluemix' + ":" + '446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952'));
+           },
+           data: '{ "selector": { "device_type": "Generator" }, "fields": ["_id","_rev","device_type","device_id","data_timestamp","d.energy","d.nominal_power","d.line_voltage","d.coolant","d.mode","d.battery","d.tank_capacity","d.current", "d.apprent_power","d.active_power", "d.power_factor"], "sort": [{"device_type": "desc"},{"device_id": "desc"},{"data_timestamp": "desc"}], "limit": 20, "skip": 0, "use_index":["_design/f7ed82b6c849da29fa8de968269701220661a4b5"] }',
+           url: 'https://bba026be-4c3d-4270-b651-26df5dc07671-bluemix:446854be7d110441252c2aeab46d49e67b14d67c04e7e9f111e4ffeb18458952@bba026be-4c3d-4270-b651-26df5dc07671-bluemix.cloudant.com/db_device_data_1_16_02/_find',
            success: function(data) {
+//               console.log(data);
                var res = [];
                var points = [];
-               for(var i = 0; i < data.rows.length; i++)
+               for(var i = 0; i < data.docs.length; i++)
                {
-                   var date1 = data.rows[i].value.timestamp;
-                   var date =date1.split('T');
+                   var date1 = data.docs[i].data_timestamp;
+//                   var date =date1.split('T');
 
-                   res.push(date[1].split('.')[0]);
-                   points.push(eval('data.rows[i].value.data.d.'+datasetKey));
+                   var d = new Date(0);
+                   d.setUTCMilliseconds(date1);
+                   res.push(d.getHours()+ ':'+ d.getMinutes() + ':'+ d.getSeconds());
+                   points.push(eval('data.docs[i].d.'+datasetKey));
 
                }
                var data = {
@@ -605,7 +613,7 @@ jQuery(document).ready(function() {
                plot.draw();
                $('#last_updated').text(new Date());*/
            },
-           dataType: 'jsonp',
+//           dataType: 'jsonp',
            error: function(jqXHR,textStatus,errorThrown) {
                console.log(errorThrown);
                console.log(textStatus);
@@ -613,6 +621,8 @@ jQuery(document).ready(function() {
 
            }
        });
+
+
    }
 
 
