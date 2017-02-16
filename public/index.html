@@ -537,12 +537,12 @@ jQuery(document).ready(function() {
 
     function update() {
 //                    console.log(getRandomData());
-//        populateData(datasetKey);
+        populateData();
 //                    console.log(getDataFromBluemix());
 //                    plot.setData([getRandomData()]);
 //                    plot.draw();
-        setInterval(populateData(datasetKey), datasetTime*60*1000);
-//        setInterval(populateData, 5000);
+//        setInterval(populateData(datasetKey), 5000);
+        setInterval(populateData, 5000);
     }
     update();
 
@@ -567,9 +567,10 @@ jQuery(document).ready(function() {
                {
                    var date1 = data.docs[i].data_timestamp;
 //                   var date =date1.split('T');
-
-                   var d = new Date(0);
-                   d.setUTCMilliseconds(date1);
+//                                   console.log(date1);
+                   var d = new Date(parseInt(date1));
+//                   d.setUTCMilliseconds(date1);
+//                   console.log(d.getHours()+ ':'+ d.getMinutes() + ':'+ d.getSeconds());
                    res.push(d.getHours()+ ':'+ d.getMinutes() + ':'+ d.getSeconds());
                    points.push(eval('data.docs[i].d.'+datasetKey));
 
